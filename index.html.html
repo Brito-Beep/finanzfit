@@ -1,0 +1,549 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FinanzFit</title>
+  <style>
+    :root{
+      --blue:#0b5bd3;
+      --blue2:#0a4fb8;
+      --bg:#f6f8ff;
+      --card:#ffffff;
+      --text:#0b1220;
+      --muted:#4b5563;
+      --line:#e7ecff;
+      --radius:18px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    body{
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--text);
+      background:var(--bg);
+      line-height:1.6;
+    }
+    a{color:var(--blue);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .container{max-width:1100px;margin:0 auto;padding:24px}
+
+    .nav{
+      position:sticky; top:0; z-index:50;
+      background:rgba(246,248,255,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid var(--line);
+    }
+    .nav-inner{display:flex;gap:14px;align-items:center;justify-content:space-between}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:850}
+    .logo{
+      width:44px;height:44px;border-radius:12px;
+      border:1px solid var(--line);
+      box-shadow: 0 6px 18px rgba(11,91,211,0.12);
+      background:white;
+      object-fit:contain;
+      padding:4px;
+    }
+    .brand-title{font-size:18px;line-height:1.15}
+    .brand-sub{font-size:13px;color:var(--muted);font-weight:650}
+
+    .menu{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+    .menu a{padding:10px 12px;border-radius:12px;color:var(--text)}
+    .menu a:hover{background:var(--card)}
+
+    .hero{
+      display:grid;grid-template-columns:1.1fr 0.9fr;
+      gap:22px;align-items:center;
+      background:var(--card); border:1px solid var(--line);
+      border-radius:var(--radius); padding:26px;
+    }
+    .hero h1{margin:0;font-size:40px;letter-spacing:-0.5px}
+    .hero p{margin:10px 0 16px;color:var(--muted);font-size:18px}
+    .btns{display:flex;gap:12px;flex-wrap:wrap}
+    .btn{
+      display:inline-block; padding:12px 16px; border-radius:14px;
+      border:1px solid var(--line); background:var(--card);
+      font-weight:700;
+    }
+    .btn.primary{background:var(--blue);border-color:var(--blue);color:white}
+    .btn.primary:hover{background:var(--blue2);text-decoration:none}
+    .btn:hover{text-decoration:none}
+
+    .section{margin-top:22px}
+    .section h2{font-size:26px;margin:0 0 10px}
+
+    .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+
+    .card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:16px;
+    }
+    .card h3{margin:6px 0 6px;font-size:18px}
+    .card p{margin:0;color:var(--muted)}
+
+    .badge{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:10px 12px;border-radius:14px;
+      background:rgba(11,91,211,0.08); border:1px solid rgba(11,91,211,0.18);
+      color:var(--text);
+      margin-right:8px;
+      font-weight:650;
+    }
+
+    .tip{
+      background:rgba(11,91,211,0.06);
+      border:1px solid rgba(11,91,211,0.16);
+      border-radius:var(--radius);
+      padding:14px;
+      color:var(--text);
+    }
+    .tip b{color:var(--blue2)}
+
+    .table{
+      width:100%; border-collapse:collapse; overflow:hidden;
+      border:1px solid var(--line); border-radius:16px;
+      background:var(--card);
+    }
+    .table th,.table td{padding:12px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+    .table th{background:rgba(11,91,211,0.06)}
+    .table tr:last-child td{border-bottom:none}
+
+    .small{font-size:14px;color:var(--muted)}
+    .lead{margin:0 0 16px;color:var(--muted);font-size:18px}
+
+    .kacheln{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .kachel{
+      display:flex;gap:12px;align-items:flex-start;
+      background:var(--card); border:1px solid var(--line);
+      border-radius:var(--radius); padding:14px;
+    }
+    .kachel strong{display:block;margin-bottom:4px}
+
+    .icon{width:44px;height:44px;flex:0 0 auto}
+    .hero-illu{width:100%;height:auto;border-radius:16px;border:1px solid var(--line);background:white}
+
+    .avatar{
+      width:84px;height:84px;border-radius:18px;
+      border:1px solid var(--line);background:white;
+      display:grid;place-items:center;
+      flex:0 0 auto;
+    }
+
+    .footer{
+      margin-top:30px; padding:18px;
+      color:var(--muted); font-size:14px;
+      border-top:1px solid var(--line);
+    }
+
+    .anchor{scroll-margin-top:92px}
+
+    ul{margin:10px 0 0 18px}
+    li{margin:6px 0}
+
+    @media (max-width: 900px){
+      .hero{grid-template-columns:1fr}
+      .grid3,.kacheln{grid-template-columns:1fr}
+      .grid2{grid-template-columns:1fr}
+      .hero h1{font-size:34px}
+    }
+  </style>
+</head>
+<body>
+
+  <div class="nav">
+    <div class="container nav-inner">
+      <div class="brand">
+        <img src="finanzfit-logo.png" alt="FinanzFit Logo" class="logo" />
+        <div>
+          <div class="brand-title">FinanzFit</div>
+          <div class="brand-sub">Dein Weg zu mehr Geldbewusstsein</div>
+        </div>
+      </div>
+      <div class="menu">
+        <a href="#start">Start</a>
+        <a href="#budget">Budget</a>
+        <a href="#spartipps">Spartipps</a>
+        <a href="#konsumfallen">Konsumfallen</a>
+        <a href="#steuern">Steuern</a>
+        <a href="#rechnungen">Rechnungen</a>
+        <a href="#beispielbudget">Beispielbudget</a>
+        <a href="#downloads">Downloads</a>
+        <a href="#ueber">Über mich</a>
+      </div>
+    </div>
+  </div>
+
+  <main class="container">
+
+    <section id="start" class="hero anchor">
+      <div>
+        <h1>FinanzFit</h1>
+        <p>FinanzFit ist ein kompaktes Lernangebot für Jugendliche und junge Erwachsene. Es zeigt dir Schritt für Schritt, wie du deine Finanzen im Alltag im Griff hast, ohne dass es kompliziert wird. Du findest klare Erklärungen, Beispiele und kleine Checklisten, die du sofort anwenden kannst.</p>
+        <div class="btns">
+          <a class="btn primary" href="#budget">Mit Budget starten</a>
+          <a class="btn" href="#downloads">Vorlagen herunterladen</a>
+        </div>
+        <div class="section" style="margin-top:16px">
+          <span class="badge">Einfach erklärt</span>
+          <span class="badge">Praxisnah aus der Verwaltung</span>
+          <span class="badge">Für den Start ins Erwachsenwerden</span>
+        </div>
+      </div>
+
+      <img class="hero-illu" src="data:image/jpeg;base64,{{IMAGE_BASE64}}" alt="Budget planen, Geld sparen und Überblick behalten" />
+    </section>
+
+    <section class="section">
+      <h2>Was du hier lernst</h2>
+      <div class="kacheln">
+        <div class="kachel">
+          <svg class="icon" viewBox="0 0 96 96" aria-hidden="true">
+            <rect x="10" y="14" width="76" height="68" rx="10" fill="#0b5bd3" opacity="0.12"/>
+            <rect x="18" y="24" width="60" height="10" rx="5" fill="#0b5bd3" opacity="0.35"/>
+            <rect x="18" y="42" width="44" height="10" rx="5" fill="#0b5bd3" opacity="0.35"/>
+            <rect x="18" y="60" width="52" height="10" rx="5" fill="#0b5bd3" opacity="0.35"/>
+            <circle cx="76" cy="60" r="10" fill="#0b5bd3" opacity="0.45"/>
+          </svg>
+          <div>
+            <strong>Budget</strong>
+            <div class="small">Du baust dir einen realistischen Plan für Einnahmen, Fixkosten und Freizeit. So siehst du, was möglich ist und was nicht.</div>
+          </div>
+        </div>
+
+        <div class="kachel">
+          <svg class="icon" viewBox="0 0 96 96" aria-hidden="true">
+            <rect x="14" y="14" width="68" height="68" rx="14" fill="#0b5bd3" opacity="0.12"/>
+            <path d="M48 22c-12 0-22 9-22 21 0 8 4 14 10 18 2 1 3 3 3 6v3h18v-3c0-3 1-5 3-6 6-4 10-10 10-18 0-12-10-21-22-21z" fill="#0b5bd3" opacity="0.45"/>
+            <rect x="39" y="72" width="18" height="6" rx="3" fill="#0b5bd3" opacity="0.55"/>
+          </svg>
+          <div>
+            <strong>Spartipps</strong>
+            <div class="small">Keine leeren Sprüche. Du bekommst kleine Tricks, die im Alltag wirklich funktionieren und nicht nerven.</div>
+          </div>
+        </div>
+
+        <div class="kachel">
+          <svg class="icon" viewBox="0 0 96 96" aria-hidden="true">
+            <rect x="12" y="18" width="72" height="60" rx="12" fill="#0b5bd3" opacity="0.12"/>
+            <path d="M28 36h44l-4 30H32l-4-30z" fill="#0b5bd3" opacity="0.35"/>
+            <path d="M34 36c0-8 6-14 14-14h0c8 0 14 6 14 14" fill="none" stroke="#0b5bd3" stroke-width="6" opacity="0.45" stroke-linecap="round"/>
+            <circle cx="38" cy="72" r="5" fill="#0b5bd3" opacity="0.55"/>
+            <circle cx="62" cy="72" r="5" fill="#0b5bd3" opacity="0.55"/>
+          </svg>
+          <div>
+            <strong>Konsumfallen</strong>
+            <div class="small">Du erkennst typische Fallen wie Abos, Ratenzahlungen und spontane Online Käufe, bevor sie dich Geld kosten.</div>
+          </div>
+        </div>
+
+        <div class="kachel">
+          <svg class="icon" viewBox="0 0 96 96" aria-hidden="true">
+            <rect x="14" y="14" width="68" height="68" rx="14" fill="#0b5bd3" opacity="0.12"/>
+            <path d="M30 30h36v44H30z" fill="#0b5bd3" opacity="0.28"/>
+            <path d="M36 38h24" stroke="#0b5bd3" stroke-width="6" opacity="0.45" stroke-linecap="round"/>
+            <path d="M36 52h18" stroke="#0b5bd3" stroke-width="6" opacity="0.45" stroke-linecap="round"/>
+            <path d="M36 66h22" stroke="#0b5bd3" stroke-width="6" opacity="0.45" stroke-linecap="round"/>
+          </svg>
+          <div>
+            <strong>Steuern ab 18</strong>
+            <div class="small">Du weisst, was vor dem 18 Geburtstag wichtig ist und wie du danach mit Briefen, Fristen und Unterlagen umgehst.</div>
+          </div>
+        </div>
+
+        <div class="kachel">
+          <svg class="icon" viewBox="0 0 96 96" aria-hidden="true">
+            <rect x="14" y="12" width="68" height="72" rx="12" fill="#0b5bd3" opacity="0.12"/>
+            <path d="M30 24h36v54l-6-4-6 4-6-4-6 4-6-4-6 4V24z" fill="#0b5bd3" opacity="0.30"/>
+            <path d="M36 34h24" stroke="#0b5bd3" stroke-width="6" opacity="0.50" stroke-linecap="round"/>
+            <path d="M36 48h20" stroke="#0b5bd3" stroke-width="6" opacity="0.50" stroke-linecap="round"/>
+            <path d="M36 62h16" stroke="#0b5bd3" stroke-width="6" opacity="0.50" stroke-linecap="round"/>
+          </svg>
+          <div>
+            <strong>Rechnungen und Fristen</strong>
+            <div class="small">Du lernst ein simples System, damit du keine Rechnung vergisst und keine unnötigen Gebühren zahlst.</div>
+          </div>
+        </div>
+
+        <div class="kachel">
+          <svg class="icon" viewBox="0 0 96 96" aria-hidden="true">
+            <rect x="12" y="14" width="72" height="68" rx="14" fill="#0b5bd3" opacity="0.12"/>
+            <path d="M28 62h10V44H28v18zm16 0h10V34H44v28zm16 0h10V50H60v12z" fill="#0b5bd3" opacity="0.45"/>
+            <path d="M26 70h44" stroke="#0b5bd3" stroke-width="6" opacity="0.35" stroke-linecap="round"/>
+          </svg>
+          <div>
+            <strong>Beispielbudget</strong>
+            <div class="small">Du bekommst ein Beispiel, das nah am Alltag ist und dir zeigt, wie du Geld einteilst, ohne dass am Ende alles weg ist.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Warum das aus der Praxis kommt</h2>
+      <div class="tip">
+        <b>Praxis Hinweis</b><br />
+        Während meiner Lehre bei der Gemeindeverwaltung war ich im Steueramt und im Betreibungsamt. Dort sieht man sehr direkt, wo es bei vielen jungen Leuten schief geht. Oft sind es keine grossen Fehler, sondern kleine Dinge wie ungeöffnete Post, vergessene Fristen oder ein falscher Eintrag im Fragebogen. Genau darum ist diese Website so aufgebaut, dass du sofort weisst, was du konkret tun sollst.
+      </div>
+    </section>
+
+    <section id="budget" class="section anchor">
+      <h2>Budget</h2>
+      <p class="lead">Ein Budget ist kein kompliziertes Excel Monster. Es ist ein einfacher Überblick, der dir sagt, was du dir leisten kannst und was du besser lassen solltest.</p>
+      <div class="grid3">
+        <div class="card">
+          <h3>Schritt 1 Einnahmen klären</h3>
+          <p>Schreibe alles auf, was regelmässig reinkommt. Lehrlingslohn, Nebenjob, Zulagen. Nimm lieber den tieferen Betrag, damit du auf der sicheren Seite bist.</p>
+        </div>
+        <div class="card">
+          <h3>Schritt 2 Fixkosten erfassen</h3>
+          <p>Fixkosten sind Ausgaben, die fast immer kommen. Handy, ÖV, Versicherungen, Abos. Wenn du Fixkosten kennst, ist schon die Hälfte erledigt.</p>
+        </div>
+        <div class="card">
+          <h3>Schritt 3 Freizeit realistisch planen</h3>
+          <p>Freizeit ist wichtig. Plane sie bewusst ein, statt am Schluss zu hoffen, dass noch etwas übrig ist. Ein fixes Wochenbudget hilft enorm.</p>
+        </div>
+      </div>
+      <div class="card" style="margin-top:14px">
+        <h3>Mini Beispiel</h3>
+        <p class="small">Wenn du 1500 CHF Lohn hast und 400 CHF Fixkosten, dann bleiben 1100 CHF. Davon kannst du zum Beispiel 150 CHF sparen, 250 CHF Freizeit planen und den Rest für Essen, Handy, Reserve und grössere Ausgaben nutzen.</p>
+      </div>
+      <div class="tip" style="margin-top:14px">
+        <b>Tipp</b><br />
+        Schreibe eine Woche lang jede Ausgabe auf. Danach siehst du schwarz auf weiss, wo dein Geld wirklich hingeht. Genau dort findest du meist die grössten Hebel.
+      </div>
+    </section>
+
+    <section id="spartipps" class="section anchor">
+      <h2>Spartipps</h2>
+      <p class="lead">Sparen klappt am besten, wenn es sich nicht wie Strafe anfühlt. Darum sind diese Tipps so gewählt, dass sie ohne grossen Aufwand funktionieren.</p>
+      <div class="grid2">
+        <div class="card">
+          <h3>Abos aufräumen</h3>
+          <p>Viele verlieren Geld durch Abos, die nebenbei laufen. Schau in deine Kontoauszüge und schreibe alle Abos auf. Kündige konsequent, was du selten nutzt.</p>
+          <ul>
+            <li>Streaming nur eins statt drei</li>
+            <li>Apps nur behalten, wenn du sie wirklich brauchst</li>
+            <li>Probeabo sofort im Kalender notieren</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Essen unterwegs reduzieren</h3>
+          <p>Snacks und Getränke wirken klein, sind aber oft der grösste Kostentreiber. Plane einfache Alternativen, dann sparst du automatisch.</p>
+          <ul>
+            <li>Trinkflasche statt tägliche Getränke</li>
+            <li>Lunch von zuhause ein bis zwei Mal pro Woche</li>
+            <li>Fixes Snackbudget</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Sparen zuerst, nicht am Ende</h3>
+          <p>Wenn du zuerst sparst, musst du nicht hoffen, dass am Ende noch etwas übrig ist. Lege direkt nach dem Lohn einen Betrag zur Seite.</p>
+          <ul>
+            <li>Start mit 20 oder 50 CHF</li>
+            <li>Bei Lohnerhöhung leicht erhöhen</li>
+            <li>Sparziel notieren, damit es Sinn macht</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Freizeit bewusst planen</h3>
+          <p>Du sollst Spass haben. Aber mit Plan. Wenn du pro Woche einen Betrag festlegst, ist es viel einfacher, nicht zu übertreiben.</p>
+          <ul>
+            <li>Wochenbudget festlegen</li>
+            <li>Bargeld oder separates Konto nutzen</li>
+            <li>Wenn es leer ist, ist es leer</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tip" style="margin-top:14px">
+        <b>Mini Challenge</b><br />
+        Lege eine Woche lang jeden Tag 2 Franken zur Seite. Am Ende hast du 14 Franken und merkst, dass kleine Beträge einen Unterschied machen.
+      </div>
+    </section>
+
+    <section id="konsumfallen" class="section anchor">
+      <h2>Konsumfallen</h2>
+      <p class="lead">Konsumfallen sind gefährlich, weil sie leise sind. Es sind nicht immer grosse Käufe, sondern viele kleine Dinge, die sich summieren.</p>
+      <div class="grid3">
+        <div class="card">
+          <h3>Abos und automatische Zahlungen</h3>
+          <p>Wenn etwas automatisch abgebucht wird, vergisst man es schnell. Darum ist es wichtig, regelmässig zu prüfen, was jeden Monat weggeht.</p>
+          <p class="small">Tipp: Suche im Konto nach wiederkehrenden Buchungen.</p>
+        </div>
+        <div class="card">
+          <h3>Ratenzahlungen</h3>
+          <p>Raten wirken bequem, aber sie binden dich über Monate. Dazu kommen oft Gebühren oder du zahlst am Ende mehr als gedacht.</p>
+          <p class="small">Merke: Wenn du es heute nicht zahlen kannst, ist es oft kein guter Moment dafür.</p>
+        </div>
+        <div class="card">
+          <h3>Social Media Kaufdruck</h3>
+          <p>Werbung ist heute extrem gut gemacht. Wenn du müde bist oder dich langweilst, kaufst du schneller. Ein kurzer Stop hilft.</p>
+          <p class="small">Regel: Einen Tag warten, dann entscheiden.</p>
+        </div>
+      </div>
+      <div class="card" style="margin-top:14px">
+        <h3>Drei Fragen vor dem Kauf</h3>
+        <ol>
+          <li>Brauche ich das wirklich</li>
+          <li>Kann ich mir das leisten</li>
+          <li>Kann ich eine Woche warten</li>
+        </ol>
+        <p class="small">Wenn du warten kannst, ist es meist kein Muss.</p>
+      </div>
+    </section>
+
+    <section id="steuern" class="section anchor">
+      <h2>Steuern ab 18</h2>
+      <p class="lead">Steuern wirken am Anfang mühsam. Wenn du aber die Grundlogik verstanden hast, ist es jedes Jahr gleich und du hast keinen Stress.</p>
+
+      <div class="card">
+        <h3>Vor dem 18 Geburtstag</h3>
+        <p>Viele erhalten vor dem 18 Geburtstag einen Fragebogen vom Steueramt. Der ist wichtig, weil daraus die provisorische Steuerrechnung entsteht.</p>
+        <ul>
+          <li>Lehrbeginn korrekt angeben</li>
+          <li>Einkommen realistisch angeben</li>
+          <li>Alles wahrheitsgetreu ausfüllen</li>
+        </ul>
+        <p>Wenn du hier falsche Angaben machst, kann es später zu Nachzahlungen kommen. Das ist unnötig und lässt sich vermeiden.</p>
+      </div>
+
+      <div class="grid3" style="margin-top:14px">
+        <div class="card">
+          <h3>Post ernst nehmen</h3>
+          <p>Briefe vom Steueramt immer öffnen. Oft ist es nur eine Nachfrage oder eine Frist. Je früher du reagierst, desto einfacher ist es.</p>
+        </div>
+        <div class="card">
+          <h3>Fristen im Kalender</h3>
+          <p>Trage wichtige Termine sofort ein. Wenn du mehr Zeit brauchst, kannst du meist eine Fristerstreckung beantragen, aber nicht im letzten Moment.</p>
+        </div>
+        <div class="card">
+          <h3>Unterlagen sammeln</h3>
+          <p>Lohnabrechnungen und wichtige Belege in einem Ordner sammeln. Dann musst du später nicht alles suchen.</p>
+        </div>
+      </div>
+
+      <div class="tip" style="margin-top:14px">
+        <b>Praxis Hinweis</b><br />
+        Im Steueramt habe ich oft gesehen, dass es weniger an fehlendem Wissen liegt, sondern an fehlender Organisation. Wer Post öffnet und Fristen notiert, ist schon weit vorne.
+      </div>
+    </section>
+
+    <section id="rechnungen" class="section anchor">
+      <h2>Rechnungen und Fristen</h2>
+      <p class="lead">Rechnungen sind nicht das Problem. Das Problem ist, wenn man sie vergisst oder nicht öffnet. Mit einem einfachen System kannst du das komplett vermeiden.</p>
+
+      <div class="grid2">
+        <div class="card">
+          <h3>Rechnung sofort prüfen</h3>
+          <p>Öffnen, Datum checken, Betrag prüfen. Wenn etwas komisch wirkt, nicht warten, sondern kurz nachfragen.</p>
+        </div>
+        <div class="card">
+          <h3>Fälligkeit notieren</h3>
+          <p>Trage das Datum direkt in deinen Kalender ein. Dann vergisst du es nicht, auch wenn du gerade viel um die Ohren hast.</p>
+        </div>
+        <div class="card">
+          <h3>Moment der Rechnungszahlung</h3>
+          <p>Lege einen festen Zeitpunkt in der Woche fest, an dem du alle Rechnungen prüfst und bezahlst. Das kann zum Beispiel einmal pro Woche sein. So sammelst du keine offenen Beträge an und hast jederzeit den Überblick.</p>
+        </div>
+        <div class="card">
+          <h3>Wenn es knapp wird</h3>
+          <p>Früh melden. Viele Anbieter sind offen für Teilzahlungen, wenn du dich rechtzeitig meldest.</p>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:14px">
+        <h3>Was passiert bei zu später Zahlung</h3>
+        <table class="table">
+          <tr><th>Schritt</th><th>Was passiert</th><th>Was du tun kannst</th></tr>
+          <tr><td>Rechnung</td><td>Fälligkeit läuft</td><td>Datum notieren und rechtzeitig zahlen</td></tr>
+          <tr><td>Mahnung</td><td>Gebühren und neuer Termin</td><td>Sofort reagieren, nicht weiter warten</td></tr>
+          <tr><td>Betreibung</td><td>Offizielles Verfahren mit Folgen</td><td>Früh Hilfe holen und klären</td></tr>
+        </table>
+      </div>
+
+      <div class="tip" style="margin-top:14px">
+        <b>Praxis Hinweis</b><br />
+        Im Betreibungsamt habe ich erlebt, dass viele Betreibungen aus kleinen Beträgen entstanden sind, einfach weil Rechnungen ignoriert wurden. Das ist vermeidbar, wenn du früh reagierst.
+      </div>
+    </section>
+
+    <section id="beispielbudget" class="section anchor">
+      <h2>Beispielbudget</h2>
+      <p class="lead">Ein Beispiel hilft, weil du sofort siehst, wie man Beträge aufteilt. Es ist kein Standard, sondern eine Orientierung, die du anpassen kannst.</p>
+
+      <div class="card">
+        <table class="table">
+          <tr><th>Position</th><th>Betrag pro Monat</th><th>Hinweis</th></tr>
+          <tr><td>Einnahmen Lehrlingslohn</td><td>1500 CHF</td><td>Beispielwert</td></tr>
+          <tr><td>Handy</td><td>60 CHF</td><td>Abo oder Prepaid</td></tr>
+          <tr><td>ÖV</td><td>90 CHF</td><td>Je nach Strecke</td></tr>
+          <tr><td>Abos</td><td>30 CHF</td><td>Streaming, Apps</td></tr>
+          <tr><td>Essen unterwegs</td><td>120 CHF</td><td>Snack und Mittag</td></tr>
+          <tr><td>Freizeit</td><td>220 CHF</td><td>Ausgang, Hobby</td></tr>
+          <tr><td>Sparen</td><td>150 CHF</td><td>Fix zur Seite legen</td></tr>
+          <tr><td>Rest für Sonstiges</td><td>780 CHF</td><td>Reserve für Unerwartetes</td></tr>
+        </table>
+        <p class="small">Wenn du merkst, dass ein Bereich zu hoch ist, passe ihn an. Wichtig ist, dass du am Ende nicht überrascht wirst.</p>
+      </div>
+
+      <div class="tip" style="margin-top:14px">
+        <b>Tipp</b><br />
+        Setze zuerst Sparen und Fixkosten. Was danach übrig bleibt, ist dein Spielraum. So bleibst du realistisch.
+      </div>
+    </section>
+
+    <section id="downloads" class="section anchor">
+      <h2>Downloads</h2>
+      <p class="lead">Hier findest du die Vorlagen und Checklisten. Sie sind extra so gemacht, dass du sie direkt nutzen kannst, ohne lange zu überlegen.</p>
+
+      <div class="grid3">
+        <div class="card">
+          <h3>Budget Vorlage</h3>
+          <p>Für deinen eigenen Überblick. Ideal, wenn du neu startest oder endlich Ordnung reinbringen willst.</p>
+          <a class="btn primary" href="Budget_Vorlage_FinanzFit.pdf" download>PDF herunterladen</a>
+          <p class="small" style="margin-top:10px">Tipp: Drucke sie aus oder fülle sie digital aus, beides funktioniert.</p>
+        </div>
+        <div class="card">
+          <h3>Checkliste Rechnungen</h3>
+          <p>Für alle, die nichts vergessen wollen. Kurz, klar und direkt auf den Alltag abgestimmt.</p>
+          <a class="btn primary" href="Checkliste_Rechnungen_und_Fristen_FinanzFit.pdf" download>PDF herunterladen</a>
+          <p class="small" style="margin-top:10px">Tipp: Hänge sie an einen Ort, den du oft siehst.</p>
+        </div>
+        <div class="card">
+          <h3>Checkliste Steuern</h3>
+          <p>Damit du vor und ab 18 weisst, was wichtig ist und welche Infos korrekt sein müssen.</p>
+          <a class="btn primary" href="Checkliste_Steuern_ab_18_FinanzFit.pdf" download>PDF herunterladen</a>
+          <p class="small" style="margin-top:10px">Tipp: Nutze sie, wenn Post vom Steueramt kommt.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="ueber" class="section anchor">
+      <h2>Über mich</h2>
+      <p class="lead">Ich wollte eine Website machen, die nicht nur erklärt, sondern hilft. Darum ist FinanzFit so aufgebaut, dass man schnell etwas daraus mitnimmt.</p>
+
+      <div class="card" style="display:flex;gap:16px;align-items:center;flex-wrap:wrap">
+        <div class="avatar" aria-label="Neutrales Avatar Bild" role="img">
+          <svg width="64" height="64" viewBox="0 0 160 160" aria-hidden="true">
+            <circle cx="80" cy="80" r="76" fill="#0b5bd3" opacity="0.10"/>
+            <circle cx="80" cy="64" r="28" fill="#0b5bd3" opacity="0.30"/>
+            <path d="M32 136c10-26 32-40 48-40s38 14 48 40" fill="#0b5bd3" opacity="0.25"/>
+          </svg>
+        </div>
+        <div style="min-width:260px;flex:1">
+          <h3 style="margin:0 0 6px">Severin Martin</h3>
+          <p style="margin:0;color:var(--muted)">Ich mache eine kaufmännische Lehre bei der Gemeindeverwaltung Mosnang. Während meiner Lehrzeit war ich im Steueramt und im Betreibungsamt. Dort habe ich gesehen, wie schnell es bei jungen Leuten zu Problemen kommen kann, wenn Rechnungen liegen bleiben oder Fristen verpasst werden. Mit FinanzFit will ich genau diese typischen Fehler verhindern und das Thema so erklären, dass man es wirklich versteht.</p>
+        </div>
+      </div>
+
+      
+    </section>
+
+    <div class="footer">
+      Schulprojekt WPB2. Die Website ist nur während der Projektphase online. Inhalte sind informativ und ersetzen keine individuelle Beratung.
+    </div>
+
+  </main>
+</body>
+</html>
